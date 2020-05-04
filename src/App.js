@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import Menu from "./components/Menu";
+import Comment from "./components/Comment";
 
 function App() {
+  const [commentpage, setcommentPage] = useState({Page:true, Info:''});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="MovieMenu">
+        <h1>Movie Recommendation</h1>
+      </div>
+       {commentpage.Page?
+          <Menu callback={(page, info) => setcommentPage({Page: page, Info: info})}/>
+        : <Comment movie_info = {commentpage.Info} callback = {page => setcommentPage({Page:page})}/>}
     </div>
   );
 }
