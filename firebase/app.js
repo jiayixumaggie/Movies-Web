@@ -1,8 +1,7 @@
-
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceaccount.json");
-const express=require('express');
-const bodyParser=require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 admin.initializeApp({
@@ -10,91 +9,125 @@ admin.initializeApp({
   databaseURL: "https://final-project-94ce2.firebaseio.com"
 });
 
-const db=admin.firestore();
+const db = admin.firestore();
 
-const app=express(); 
+const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
-  "Access-Control-Allow-Methods",
-  "GET,HEAD,OPTIONS,POST,PUT,DELETE"
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
   );
   res.setHeader(
-  "Access-Control-Allow-Headers",
-  "Origin,Cache-Control,Accept,X-Access-Token ,X-Requested-With, Content-Type, Access-Control-Request-Method"
+    "Access-Control-Allow-Headers",
+    "Origin,Cache-Control,Accept,X-Access-Token ,X-Requested-With, Content-Type, Access-Control-Request-Method"
   );
   if (req.method === "OPTIONS") {
-  return res.status(200).end();
+    return res.status(200).end();
   }
   next();
-  });
-const port=8080;
+});
+const port = 8080;
 
-const moviesCollection=db.collection('movies');
+const moviesCollection = db.collection("movies");
 
-app.post('/movies', function(req,res){
-  const movies=req.body;
+app.post("/movies", function(req, res) {
+  const movies = req.body;
   moviesCollection.doc().set(movies);
-  res.send('movie added');
+  res.send("movie added");
 });
 
-app.get('/movies', async function(req, res){
-  const allMoviesDoc=await moviesCollection.get();
-  const movie=[]
-  for(let doc of allMoviesDoc.docs){
-    let mov=doc.data();
-    mov.id=doc.id;
-    movie.push(mov);
-  }
-  res.send(movie);
-});
-app.get('/movies/:Genre', async function(req,res){
-  const allMoviesDoc=await moviesCollection.where('Genre', '==', req.params.Genre).get();
-  const movie=[]
-  for(let doc of allMoviesDoc.docs){
-    let mov=doc.data();
-    mov.id=doc.id;
-    movie.push(mov);
-  }
-  res.send(movie);
-});
-app.get('/movies/:Directors', async function(req,res){
-  const allMoviesDoc=await moviesCollection.where('Directors', '==', req.params.Directors).get();
-  const movie=[]
-  for(let doc of allMoviesDoc.docs){
-    let mov=doc.data();
-    mov.id=doc.id;
+app.get("/movies", async function(req, res) {
+  const allMoviesDoc = await moviesCollection.get();
+  const movie = [];
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
     movie.push(mov);
   }
   res.send(movie);
 });
 
-app.put('/movies/:Genre', async function(req,res){
-    const Genre=req.params.Genre;
-    const updatedGenre=req.body.Genre;
-    moviesCollection.doc(Genre).update(updatedGenre);
-    res.send('updated');
+app.get("/movies/director/:Director", async function(req, res) {
+  const allMoviesDoc = await moviesCollection
+    .where("Director", "==", req.params.Director)
+    .get();
+  const movie = [];
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
+    movie.push(mov);
+  }
+  if(movie.length == 0){
+    res.send("no result");
+  }else{
+    res.send(movie);
+  }
+ 
 });
-app.put('/movies/:Directors', async function(req,res){
-  const Directors=req.params.Directors;
-  const updatedDirectors=req.body.Directors;
+
+app.get("/movies/name/:Movie_name", async function(req, res) {
+  const allMoviesDoc = await moviesCollection
+    .where("Movie_name", "==", req.params.Movie_name)
+    .get();
+
+  const movie = [];
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
+    movie.push(mov);
+  }
+  if(movie.length == 0){
+    res.send("no result");
+  }else{
+    res.send(movie);
+  }
+});
+
+app.get("/movies/genre/:Genre", async function(req, res) { 
+  const allMoviesDoc = await moviesCollection
+    .where("Genre", "==", req.params.Genre)
+    .get();
+  const movie = [];
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
+    movie.push(mov);
+  }
+  if(movie.length == 0){
+    res.send("no result");
+  }else{
+    res.send(movie);
+  }
+});
+
+app.put("/movies/:Genre", async function(req, res) {
+  const Genre = req.params.Genre;
+  const updatedGenre = req.body.Genre;
+  moviesCollection.doc(Genre).update(updatedGenre);
+  res.send("updated");
+});
+app.put("/movies/:Directors", async function(req, res) {
+  const Directors = req.params.Directors;
+  const updatedDirectors = req.body.Directors;
   moviesCollection.doc(Directors).update(updatedDirectors);
-  res.send('updated');
+  res.send("updated");
 });
-app.delete('/movies/:id', async function(req, res){
-  const id=req.params.id;
+app.delete("/movies/:id", async function(req, res) {
+  const id = req.params.id;
   await moviesCollection.doc(id).delete();
-  res.send('Deleted');
+  res.send("Deleted");
 });
-app.put('/updateRating', async function(req,res){
-  const id=req.name.id;
-  const updatedRating=req.body;
+app.put("/updateRating", async function(req, res) {
+  const id = req.name.id;
+  const updatedRating = req.body;
   await songsCollection.doc(id).update(updatedRating);
-  res.send('UPDATED');
+  res.send("UPDATED");
 });
 
-app.listen(8080, function(){console.log('app started')});
-
+app.listen(8080, function() {
+  console.log("app started");
+});

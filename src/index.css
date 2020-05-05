@@ -73,7 +73,10 @@ h1 {
   background-color: #00008b;
 }
 #dropdown-container {
-  display: none;
+  display: block;
+  background-color:#222442;
+  width: 80%;
+  height: 80%;
 }
 
 .moviecontent {
@@ -120,7 +123,7 @@ textarea {
   display: flex;
   flex-direction: row;
   text-align: center;
-  margin-top: 5%;
+  margin-top: 1%;
   margin-left: 15%;
   margin-right: 15%;
 }
@@ -128,7 +131,7 @@ textarea {
 form.moviecontent1 button {
   float: left;
   width: 20%;
-  height: 40%;
+  height: 80%;
   padding: 10px;
   background: #1e90ff;
   color: black;
@@ -156,6 +159,7 @@ form.moviecontent button {
   flex-direction: row;
   margin-top: 100px;
   margin-left: 60px;
+  
 }
 
 #commentarea {
@@ -171,8 +175,9 @@ img {
 #rating_review {
   display: flex;
   flex-direction: row;
-  margin-top: 80px;
-  margin-left: 200px;
+ 
+  margin-top: 50px;
+  margin-left: 210px;
   margin-right: 200px;
 }
 
@@ -252,8 +257,52 @@ img {
   width: 100px;
   border: none;
   margin-top:120px;
-  margin-left: 180px;
+  margin-left: 100px;
   margin-bottom: 0;
   border-radius: 8px;
   color:white;
+}
+
+#search h1{
+  color: DodgerBlue;
+  font-size:50px;
+}
+
+#search{
+  width:100%;
+  display:flex;
+  text-align:center;
+  flex-direction: column;
+}
+
+#radiobutton{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top:50px;
+  margin-left:100px;
+  
+}
+
+#radiobutton label{
+  color: DodgerBlue;
+  margin-top:10px;
+  margin-right:120px;
+  font-size: 20px;
+}
+
+#radiobutton input{
+  margin:0;
+  width:4%;
+  text-align: center;
+}
+
+
+#title{
+  display:flex;
+  flex-direction: row;
+}
+
+#title h2{
+  color: orange;
 }

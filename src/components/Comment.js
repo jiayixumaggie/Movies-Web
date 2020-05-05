@@ -5,27 +5,30 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const useStyles = makeStyles({
   rating: {
-    marginBottom: "10px"
+    marginBottom: "1px"
   }
 });
-export default ({movie_info, callback}) => {
+export default ({ movie_info, callback }) => {
   const classes = useStyles();
   const [video, setVideo] = useState(true);
-
+  console.log(movie_info.Trailer_URL);
   const trailer_display = () => {
     setVideo(false);
   };
   const closetrailer = () => {
     setVideo(true);
   };
-  const backtomain = () =>{ 
-      callback(true);
-  }
+  const backtomain = () => {
+    callback(true);
+  };
   return (
     <div>
       {video ? (
         <div id="back">
-          <button id="backbutton" onClick = {backtomain}> Back </button>
+          <button id="backbutton" onClick={backtomain}>
+            {" "}
+            Back{" "}
+          </button>
           <div id="rating_review">
             <div>
               <img
@@ -33,11 +36,13 @@ export default ({movie_info, callback}) => {
                 alt="poster"
                 src={movie_info.Poster_URL}
                 width="280"
-                height="350"
+                height="450"
               ></img>
             </div>
             <div id="intro">
               <h1>{movie_info.Movie_name}</h1>
+              <h2> Director: {movie_info.Director.replace("_", " ")}</h2>
+              <h2>{movie_info.Genre} </h2>
 
               <Rating
                 id="rating"
@@ -68,7 +73,7 @@ export default ({movie_info, callback}) => {
           </button>
           <iframe
             width="640"
-            height="360"
+            height="400"
             src={movie_info.Trailer_URL}
             frameborder="0"
             allowfullscreen=""

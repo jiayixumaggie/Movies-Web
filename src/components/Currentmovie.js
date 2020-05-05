@@ -1,0 +1,25 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import MovieList from "./MovieList";
+
+export default ({ callback }) => {
+  const [List, setList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/movies")
+      .then(function(response) {
+        setList(response.data);
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  },[]);
+  return (
+    <div className="Movie">
+      {List.map(movie => (
+        <MovieList movieInfo={movie} callback={callback} />
+      ))}
+    </div>
+  );
+};
