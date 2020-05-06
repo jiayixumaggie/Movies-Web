@@ -306,3 +306,81 @@ img {
 #title h2{
   color: orange;
 }
+
+#review{
+  margin-top: 100px;
+  color:white;
+  display:flex;
+  flex-direction: column;
+  margin-left: 100px;
+  margin-right: 100px;
+
+
+}
+
+#back_button{
+  background-color: DodgerBlue;
+  font-size: 26px;
+  width: 80px;
+  border: none;
+  margin-top:10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  color:white;
+}
+
+
+
+#add_review_button{
+  background-color: DodgerBlue;
+  font-size: 26px;
+  width: 220px;
+  border: none;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  color:white;
+  height: 60px;
+  margin-right: 100px;
+  margin-left: 82.75%;
+  white-space: nowrap;
+  
+}
+
+
+#review2{
+  display:flex;
+  flex-direction: row;
+
+}
+#review textarea{
+  width: 100%;
+  margin-right:120px;
+  
+}
+
+
+#reviewarea h1{
+  color:white;
+}
+
+#reviewcard{
+  display:flex;
+  flex-direction:column;
+  background-color:#333333;
+  outline: DodgerBlue; 
+  margin-bottom: 20px;
+}
+
+#reviewcard h1{
+  color:white;
+}
+
+#reviewcard h2{
+  color: white;
+  font-size: 20px;
+}
+
+#userName{
+  margin-bottom: 15px;
+}
+

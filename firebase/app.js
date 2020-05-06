@@ -61,12 +61,11 @@ app.get("/movies/director/:Director", async function(req, res) {
     mov.id = doc.id;
     movie.push(mov);
   }
-  if(movie.length == 0){
+  if (movie.length == 0) {
     res.send("no result");
-  }else{
+  } else {
     res.send(movie);
   }
- 
 });
 
 app.get("/movies/name/:Movie_name", async function(req, res) {
@@ -77,17 +76,30 @@ app.get("/movies/name/:Movie_name", async function(req, res) {
   const movie = [];
   for (let doc of allMoviesDoc.docs) {
     let mov = doc.data();
+
     mov.id = doc.id;
     movie.push(mov);
   }
-  if(movie.length == 0){
+  if (movie.length == 0) {
     res.send("no result");
-  }else{
+  } else {
     res.send(movie);
   }
 });
 
-app.get("/movies/genre/:Genre", async function(req, res) { 
+app.get("/movies/comment/:Movie_name", async function(req, res) {
+  const allMoviesDoc = await moviesCollection
+    .where("Movie_name", "==", req.params.Movie_name)
+    .get();
+
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
+    res.send(mov.Comment);
+  }
+});
+
+app.get("/movies/genre/:Genre", async function(req, res) {
   const allMoviesDoc = await moviesCollection
     .where("Genre", "==", req.params.Genre)
     .get();
@@ -97,11 +109,29 @@ app.get("/movies/genre/:Genre", async function(req, res) {
     mov.id = doc.id;
     movie.push(mov);
   }
-  if(movie.length == 0){
+  if (movie.length == 0) {
     res.send("no result");
-  }else{
+  } else {
     res.send(movie);
   }
+});
+
+app.put("/movies/updateComment/:Movie_name", async function(req, res) {
+  const allMoviesDoc = await moviesCollection
+    .where("Movie_name", "==", req.params.Movie_name)
+    .get();
+
+  for (let doc of allMoviesDoc.docs) {
+    let mov = doc.data();
+    mov.id = doc.id;
+    console.log(mov);
+    const movies = req.body;
+    let movie = mov.Comment;
+
+    await moviesCollection.doc(mov.id).update({ Comment: [...movie, movies] });
+  }
+
+  res.send("UPDATED");
 });
 
 app.put("/movies/:Genre", async function(req, res) {
