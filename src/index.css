@@ -74,7 +74,7 @@ h1 {
 }
 #dropdown-container {
   display: block;
-  background-color:#222442;
+  background-color: #222442;
   width: 80%;
   height: 80%;
 }
@@ -159,7 +159,6 @@ form.moviecontent button {
   flex-direction: row;
   margin-top: 100px;
   margin-left: 60px;
-  
 }
 
 #commentarea {
@@ -175,7 +174,7 @@ img {
 #rating_review {
   display: flex;
   flex-direction: row;
- 
+
   margin-top: 50px;
   margin-left: 210px;
   margin-right: 200px;
@@ -227,160 +226,147 @@ img {
 }
 
 #lightbox {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top:150px;
+  margin-top: 150px;
 }
 
-.closebutton{
+.closebutton {
   background-color: DodgerBlue;
   font-size: 26px;
   width: 35px;
   border: none;
   margin-left: 605px;
- 
 }
 
 .closebutton:hover {
   background-color: #00008b;
 }
 
-#back{
-  display:flex;
-  flex-direction:column;
+#back {
+  display: flex;
+  flex-direction: column;
 }
 
-#backbutton{
+#backbutton {
   background-color: DodgerBlue;
   font-size: 26px;
   width: 100px;
   border: none;
-  margin-top:120px;
+  margin-top: 120px;
   margin-left: 100px;
   margin-bottom: 0;
   border-radius: 8px;
-  color:white;
+  color: white;
 }
 
-#search h1{
+#search h1 {
   color: DodgerBlue;
-  font-size:50px;
+  font-size: 50px;
 }
 
-#search{
-  width:100%;
-  display:flex;
-  text-align:center;
+#search {
+  width: 100%;
+  display: flex;
+  text-align: center;
   flex-direction: column;
 }
 
-#radiobutton{
-  display:flex;
+#radiobutton {
+  display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top:50px;
-  margin-left:100px;
-  
+  margin-top: 50px;
+  margin-left: 100px;
 }
 
-#radiobutton label{
+#radiobutton label {
   color: DodgerBlue;
-  margin-top:10px;
-  margin-right:120px;
+  margin-top: 10px;
+  margin-right: 120px;
   font-size: 20px;
 }
 
-#radiobutton input{
-  margin:0;
-  width:4%;
+#radiobutton input {
+  margin: 0;
+  width: 4%;
   text-align: center;
 }
 
-
-#title{
-  display:flex;
+#title {
+  display: flex;
   flex-direction: row;
 }
 
-#title h2{
+#title h2 {
   color: orange;
 }
 
-#review{
+#review {
   margin-top: 100px;
-  color:white;
-  display:flex;
+  color: white;
+  display: flex;
   flex-direction: column;
   margin-left: 100px;
   margin-right: 100px;
-
-
 }
 
-#back_button{
+#back_button {
   background-color: DodgerBlue;
   font-size: 26px;
   width: 80px;
   border: none;
-  margin-top:10px;
+  margin-top: 10px;
   margin-bottom: 20px;
   border-radius: 8px;
-  color:white;
+  color: white;
 }
 
-
-
-#add_review_button{
+#add_review_button {
   background-color: DodgerBlue;
   font-size: 26px;
   width: 220px;
   border: none;
   margin-bottom: 20px;
   border-radius: 8px;
-  color:white;
+  color: white;
   height: 60px;
   margin-right: 100px;
   margin-left: 82.75%;
   white-space: nowrap;
-  
 }
 
-
-#review2{
-  display:flex;
+#review2 {
+  display: flex;
   flex-direction: row;
-
 }
-#review textarea{
+#review textarea {
   width: 100%;
-  margin-right:120px;
-  
+  margin-right: 120px;
 }
 
-
-#reviewarea h1{
-  color:white;
+#reviewarea h1 {
+  color: white;
 }
 
-#reviewcard{
-  display:flex;
-  flex-direction:column;
-  background-color:#333333;
-  outline: DodgerBlue; 
+#reviewcard {
+  display: flex;
+  flex-direction: column;
+  background-color: #333333;
+  outline: DodgerBlue;
   margin-bottom: 20px;
 }
 
-#reviewcard h1{
-  color:white;
+#reviewcard h1 {
+  color: white;
 }
 
-#reviewcard h2{
+#reviewcard h2 {
   color: white;
   font-size: 20px;
 }
 
-#userName{
+#userName {
   margin-bottom: 15px;
 }
-
