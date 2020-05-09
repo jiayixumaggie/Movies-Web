@@ -1,9 +1,6 @@
 import React from "react";
 
 export default ({ name, review }) => {
-  console.log(name);
-  console.log(review);
-
   return (
     <div id="reviewcard">
       <div id="userName">

@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     app.auth().onAuthStateChanged(user => {
       setCurrentUser(user);
+
       setTimeout(function() {
         setPending(false);
       }, 2000);
@@ -17,7 +18,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (pending) {
-    return <h1 style={{ color: "DodgerBlue", textAlign: "center", marginTop: "21%"}}>Loading...</h1>;
+    return (
+      <h1
+        style={{ color: "DodgerBlue", textAlign: "center", marginTop: "21%" }}
+      >
+        Loading...
+      </h1>
+    );
   }
 
   return (

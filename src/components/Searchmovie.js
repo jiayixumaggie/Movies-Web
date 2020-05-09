@@ -26,7 +26,7 @@ export default ({ callback }) => {
 
     if (selection === "movieName") {
       axios
-        .get("http://localhost:8080/movies/name/" + content)
+        .get("/movies/name/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);
@@ -36,7 +36,7 @@ export default ({ callback }) => {
         });
     } else if (selection === "genre") {
       axios
-        .get("http://localhost:8080/movies/genre/" + content)
+        .get("/movies/genre/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);
@@ -46,7 +46,7 @@ export default ({ callback }) => {
         });
     } else {
       axios
-        .get("http://localhost:8080/movies/director/" + content)
+        .get("/movies/director/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);
@@ -58,6 +58,7 @@ export default ({ callback }) => {
   };
   return (
     <div id="search">
+      <div id = "uppersearch">
       <h1>Movie search!</h1>
       <div id="radiobutton">
         <input
@@ -90,25 +91,27 @@ export default ({ callback }) => {
         <input
           placeholder=""
           value={content}
-          onChange={e => setContent(e.target.value.replace(" ", "_"))}
+          onChange={e => setContent(e.target.value.replace(/ /g, "_").toUpperCase())}
         ></input>
         <button onClick={searchMovie}>
           <i className="fa fa-search"></i>
         </button>
       </form>
+      </div>
       <div>
         {warning.length > 0 ? (
           <h1>{warning}</h1>
         ) : result === "no result" ? (
           <h1>Result not found</h1>
-        ) : result.length > 0 ? (
+        ) : result.length > 0 ? <div id ="searchresult">{(
           result.map(movie => (
             <MovieList movieInfo={movie} callback={callback} />
           ))
-        ) : (
+        )}</div> : (
           ""
         )}
       </div>
     </div>
   );
 };
+ 

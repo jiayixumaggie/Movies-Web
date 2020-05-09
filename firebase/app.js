@@ -2,7 +2,7 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./serviceaccount.json");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+//const cors = require("cors");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -13,31 +13,52 @@ const db = admin.firestore();
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin,Cache-Control,Accept,X-Access-Token ,X-Requested-With, Content-Type, Access-Control-Request-Method"
-  );
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-  next();
-});
+// app.use(cors());
+// app.use(function(req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET,HEAD,OPTIONS,POST,PUT,DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin,Cache-Control,Accept,X-Access-Token ,X-Requested-With, Content-Type, Access-Control-Request-Method"
+//   );
+//   if (req.method === "OPTIONS") {
+//     return res.status(200).end();
+//   }
+//   next();
+// });
 const port = 8080;
 
 const moviesCollection = db.collection("movies");
+const userNameCollection = db.collection("userName");
 
 app.post("/movies", function(req, res) {
   const movies = req.body;
   moviesCollection.doc().set(movies);
   res.send("movie added");
+});
+
+app.post("/userName", function(req, res) {
+  const userinfo = req.body;
+  console.log(userinfo);
+  userNameCollection.doc().set(userinfo);
+  res.send("userName added");
+});
+
+app.get("/userName/:uid", async function(req, res) {
+  const allusersDoc = await userNameCollection
+    .where("uid", "==", req.params.uid)
+    .get();
+
+  for (let doc of allusersDoc.docs) {
+    let name = doc.data();
+    name.id = doc.id;
+    res.send(name.username);
+  }
+ 
 });
 
 app.get("/movies", async function(req, res) {
@@ -158,6 +179,6 @@ app.put("/updateRating", async function(req, res) {
   res.send("UPDATED");
 });
 
-app.listen(8080, function() {
+app.listen(port, function() {
   console.log("app started");
 });

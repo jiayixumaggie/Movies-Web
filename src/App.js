@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { AuthProvider } from "./components/Auth";
 import Home from "./components/Home";

@@ -15,7 +15,7 @@ function Page() {
     <div className="App">
       <div className="MovieMenu">
         <h1>Movie Recommendation</h1>
-        <button onClick = {Signout}><i class="fa fa-user" style={{ color: "black", marginRight:"10px"
+        <button onClick = {Signout}><i className="fa fa-user" style={{ color: "black", marginRight:"10px"
           }}></i>Sign Out</button>
       </div>
       {commentpage.Page ? (

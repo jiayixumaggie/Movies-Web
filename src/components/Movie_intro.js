@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import axios from "axios";
 import UserReview from "./UserReview";
+import { AuthContext } from "./Auth";
 
 const useStyles = makeStyles({
   rating: {
@@ -16,21 +17,34 @@ export default ({ movie_info, callback }) => {
   const [review, setReview] = useState(false);
   const [reviewlist, setReviewlist] = useState([]);
   const [add, setAdd] = useState({ name: "", review: "" });
+  const { currentUser } = useContext(AuthContext);
 
-  const trailer_display = () => { 
+  useEffect(() => {
+    axios
+      .get("/userName/" + currentUser.email)
+      .then(function(response) {
+        setAdd({ ...add, name: response.data });
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }, []);
+
+  const trailer_display = () => {
     setVideo(true);
   };
-  const closetrailer = () => { 
+  const closetrailer = () => {
     setVideo(false);
   };
-  const backtomain = () => { 
-    callback(false);
+  const backtomain = () => {
+    callback(true);
   };
-  const Review = evt => { 
+  const Review = evt => {
     setReview(true);
     evt.preventDefault();
     axios
-      .get("http://localhost:8080/movies/comment/" + movie_info.Movie_name)
+      .get("/movies/comment/" + movie_info.Movie_name)
       .then(function(response) {
         setReviewlist(response.data);
       })
@@ -46,14 +60,11 @@ export default ({ movie_info, callback }) => {
   const ReviewButton = evt => {
     evt.preventDefault();
     axios
-      .put(
-        "http://localhost:8080/movies/updateComment/" + movie_info.Movie_name,
-        add
-      )
+      .put("/movies/updateComment/" + movie_info.Movie_name, add)
       .then(function(response) {
         console.log(response);
         axios
-          .get("http://localhost:8080/movies/comment/" + movie_info.Movie_name)
+          .get("/movies/comment/" + movie_info.Movie_name)
           .then(function(response) {
             setReviewlist(response.data);
           })
@@ -86,8 +97,8 @@ export default ({ movie_info, callback }) => {
                 ></img>
               </div>
               <div id="intro">
-                <h1>{movie_info.Movie_name}</h1>
-                <h2> Director: {movie_info.Director.replace("_", " ")}</h2>
+                <h1>{movie_info.Movie_name.replace(/_/g, " ")}</h1>
+                <h2> Director: {movie_info.Director.replace(/_/g, " ")}</h2>
                 <h2>{movie_info.Genre} </h2>
 
                 <Rating
@@ -100,12 +111,12 @@ export default ({ movie_info, callback }) => {
                 />
                 <h2>{movie_info.Intro}</h2>
                 <div id="review_trailer">
-                  <button class="btn" onClick={trailer_display}>
+                  <button className="btn" onClick={trailer_display}>
                     Watch Trailer <i class="fa fa-play"></i>
                   </button>
-                  <button class="btn" onClick={Review}>
+                  <button className="btn" onClick={Review}>
                     {" "}
-                    See Review <i class="fa fa-book"></i>
+                    See Review <i className="fa fa-book"></i>
                   </button>
                 </div>
               </div>
@@ -113,19 +124,21 @@ export default ({ movie_info, callback }) => {
           </div>
         ) : (
           <div id="review">
-            <button id="back_button" onClick={backtotrailer}>
-              Back
-            </button>
+            <div id="upperpart">
+              <button id="back_button" onClick={backtotrailer}>
+                Back
+              </button>
 
-            <textarea
-              placeholder="Add Review here"
-              id="comment"
-              onChange={e => setAdd({ ...add, review: e.target.value })}
-            ></textarea>
+              <textarea
+                placeholder="Add Review here"
+                id="comment"
+                onChange={e => setAdd({ ...add, review: e.target.value })}
+              ></textarea>
 
-            <button id="add_review_button" onClick={ReviewButton}>
-              Share Review
-            </button>
+              <button id="add_review_button" onClick={ReviewButton}>
+                Share Review
+              </button>
+            </div>
             <div id="reviewarea">
               {reviewlist.map(comment => (
                 <UserReview name={comment.name} review={comment.review} />
@@ -135,11 +148,12 @@ export default ({ movie_info, callback }) => {
         )
       ) : (
         <div id="lightbox">
-          <button class="closebutton" onClick={closetrailer}>
+          <button className="closebutton" onClick={closetrailer}>
             {" "}
             X{" "}
           </button>
           <iframe
+            title="movie tralier"
             width="640"
             height="400"
             src={movie_info.Trailer_URL}

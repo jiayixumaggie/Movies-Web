@@ -17,12 +17,14 @@ export default () => {
     Poster_URL: "",
     Genre: "",
     Trailer_URL: "",
+    Comment: [],
     Intro: ""
   });
 
   const MovieName = e => {
     let value = e.target.value;
-    value = value.replace(" ", "_");
+    value = value.replace(/ /g, "_");
+    value = value.toUpperCase();
     setmovieInfo({ ...movieInfo, Movie_name: value });
   };
 
@@ -34,19 +36,33 @@ export default () => {
 
   const Director = e => {
     let value = e.target.value;
-    value = value.replace(" ", "_");
+    value = value.replace(/ /g, "_");
+    value = value.toUpperCase();
     setmovieInfo({ ...movieInfo, Director: value });
   };
   const handlesubmit = evt => {
     evt.preventDefault();
     axios
-      .post("/movies", movieInfo)
+      .get("/movies/name/" + movieInfo.Movie_name)
       .then(function(response) {
-        console.log(response);
+        console.log(response.data);
+        if (response.data !== "no result") {
+          alert("This Movie has already been added by others");
+        } else {
+          axios
+          .post("/movies", movieInfo)
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        }
       })
       .catch(function(error) {
         console.log(error);
       });
+
   };
   return (
     <div id="dropdown-container">
@@ -75,7 +91,7 @@ export default () => {
           id="Genre"
           placeholder="Genre"
           value={movieInfo.Genre}
-          onChange={e => setmovieInfo({ ...movieInfo, Genre: e.target.value })}
+          onChange={e => setmovieInfo({ ...movieInfo, Genre: e.target.value.toUpperCase()})}
         ></input>
         <input
           id="trailer_URL"
@@ -98,7 +114,6 @@ export default () => {
           onChange={e => setmovieInfo({ ...movieInfo, Intro: e.target.value })}
         ></textarea>
         <button onClick={handlesubmit}>Submit</button>
-        {/* <button onClick={handlerefresh}>refresh current list </button> */}
       </form>
     </div>
   );
