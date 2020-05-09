@@ -40,7 +40,7 @@ export default () => {
   const handlesubmit = evt => {
     evt.preventDefault();
     axios
-      .post("http://localhost:8080/movies", movieInfo)
+      .post("/movie", movieInfo)
       .then(function(response) {
         console.log(response);
       })
