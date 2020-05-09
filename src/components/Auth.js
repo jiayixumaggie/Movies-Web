@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import app from "./base.js";
-import { color } from "@material-ui/system";
-import { white } from "color-name";
 
 export const AuthContext = React.createContext();
 
@@ -14,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setTimeout(function() {
         setPending(false);
-      }, 5000);
+      }, 2000);
     });
   }, []);
 

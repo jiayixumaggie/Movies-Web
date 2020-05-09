@@ -1,17 +1,22 @@
 import React, { useState, useContext } from "react";
 import Main from "./Menu";
-import Comment from "./Comment";
-import app from "./base";
-import Signup from "./Signup";
+import Comment from "./Movie_intro";
 import Section from "./Section";
 import { AuthContext } from "./Auth";
+import app from "./base.js";
 
 function Page() {
   const [commentpage, setcommentPage] = useState({ Page: true, Info: "" });
+  const Signout = ()=>{
+    app.auth().signOut();
+
+  }
   return (
     <div className="App">
       <div className="MovieMenu">
         <h1>Movie Recommendation</h1>
+        <button onClick = {Signout}><i class="fa fa-user" style={{ color: "black", marginRight:"10px"
+          }}></i>Sign Out</button>
       </div>
       {commentpage.Page ? (
         <Main

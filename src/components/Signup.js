@@ -10,7 +10,7 @@ export default ({ toLogin }) => {
         .auth()
         .createUserWithEmailAndPassword(signup.email, signup.password);
     } catch (error) {
-      alert(error);
+      alert("Error: The email address is already in use. Please use the log in button");
     }
   };
   return (
