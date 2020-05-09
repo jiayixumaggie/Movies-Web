@@ -15,26 +15,30 @@ export default ({ toLogin }) => {
   };
   return (
     <div id="signup">
-      <h1 style={{ color: "red" }}>Sign up</h1>
+      <h1
+        style={{
+          color: "DodgerBlue",
+          textAlign: "center",
+          marginBottom: "20px"
+        }}
+      >
+        Sign up
+      </h1>
       <form onSubmit={handleSignUp}>
-        <label>
-          Email:
-          <input
-            name="email"
-            placeholder="Email"
-            value={signup.email}
-            onChange={e => setSignup({ ...signup, email: e.target.value })}
-          ></input>
-        </label>
-        <label>
-          Password:
-          <input
-            name="password"
-            placeholder="Password"
-            value={signup.password}
-            onChange={e => setSignup({ ...signup, password: e.target.value })}
-          ></input>
-        </label>
+        <input
+          name="email"
+          placeholder="Email"
+          value={signup.email}
+          onChange={e => setSignup({ ...signup, email: e.target.value })}
+        ></input>
+
+        <input
+          name="password"
+          placeholder="Password"
+          value={signup.password}
+          onChange={e => setSignup({ ...signup, password: e.target.value })}
+        ></input>
+
         <button>Sign up</button>
       </form>
       <button onClick={toLogin}>Log in</button>

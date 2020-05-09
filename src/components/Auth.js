@@ -14,12 +14,12 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setTimeout(function() {
         setPending(false);
-      }, 500);
+      }, 5000);
     });
   }, []);
 
   if (pending) {
-    return <h1 style={{ color: "red" }}>Loading...</h1>;
+    return <h1 style={{ color: "DodgerBlue", textAlign: "center", marginTop: "21%"}}>Loading...</h1>;
   }
 
   return (

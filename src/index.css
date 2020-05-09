@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: black;
+  background-color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -74,8 +74,8 @@ h1 {
 }
 #dropdown-container {
   display: block;
-  background-color: #222442;
   width: 80%;
+  margin-top:0;
   height: 80%;
 }
 
@@ -98,7 +98,8 @@ input {
   background-color: black;
   outline-color: #1e90ff;
   color: white;
-  border: 1px solid#1E90FF;
+  border: none;
+  border-radius: 8px;
   width: 100%;
   margin-right: 10px;
   font-size: 20px;
@@ -115,8 +116,9 @@ h2 {
 textarea {
   background-color: black;
   outline-color: #1e90ff;
-  border: 1px solid #1e90ff;
+  border: none;
   color: white;
+  border-radius: 8px;
 }
 
 .moviecontent1 {
@@ -152,6 +154,8 @@ form.moviecontent button {
   border-left: none; /* Prevent double borders */
   cursor: pointer;
   outline: none;
+  border-radius: 8px;
+  font-size: 20px;
 }
 
 .menumovie {
@@ -369,4 +373,30 @@ img {
 
 #userName {
   margin-bottom: 15px;
+}
+
+#signup{
+  margin-left: 38%;
+  margin-right:38%;
+  margin-top:15%;
+ 
+}
+
+#signup button{
+  background-color: DodgerBlue;
+  font-size: 26px;
+  width: 100%;
+  border: none;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: black;
+  height: 40px;
+  
+  white-space: nowrap;
+}
+
+#signup input{
+  border-radius: 8px;
+  border:none;
+  height: 50px;
 }
