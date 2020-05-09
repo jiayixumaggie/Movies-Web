@@ -40,7 +40,7 @@ export default () => {
   const handlesubmit = evt => {
     evt.preventDefault();
     axios
-      .post("/movie", movieInfo)
+      .post("/movies", movieInfo)
       .then(function(response) {
         console.log(response);
       })
