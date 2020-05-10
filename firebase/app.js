@@ -1,6 +1,7 @@
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceaccount.json");
 const express = require("express");
+var cors = require('cors')
 const bodyParser = require("body-parser");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -11,6 +12,7 @@ const db = admin.firestore();
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors())
 const port = 8080;
 
 const moviesCollection = db.collection("movies");
@@ -181,6 +183,6 @@ app.put("/updateRating", async function(req, res) {
   res.send("UPDATED");
 });
 
-app.listen(process.env.PORT||port, function() {
+app.listen(8080, function() {
   console.log("app started");
 });
