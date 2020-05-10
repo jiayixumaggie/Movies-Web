@@ -35,7 +35,7 @@ export default () => {
   const handlesubmit = evt => {
     evt.preventDefault();
     axios
-      .get("/movies/name/" + movieInfo.Movie_name)
+      .get("http://localhost:8080/movies/name/" + movieInfo.Movie_name)
       .then(function(response) {
         console.log(response.data);
         if (response.data !== "no result") {

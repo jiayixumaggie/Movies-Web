@@ -26,7 +26,7 @@ export default ({ callback }) => {
 
     if (selection === "movieName") {
       axios
-        .get("/movies/name/" + content)
+        .get("http://localhost:8080/movies/name/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);
@@ -36,7 +36,7 @@ export default ({ callback }) => {
         });
     } else if (selection === "genre") {
       axios
-        .get("/movies/genre/" + content)
+        .get("http://localhost:8080/movies/genre/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);
@@ -46,7 +46,7 @@ export default ({ callback }) => {
         });
     } else {
       axios
-        .get("/movies/director/" + content)
+        .get("http://localhost:8080/movies/director/" + content)
         .then(function(response) {
           setResult(response.data);
           console.log(response.data);

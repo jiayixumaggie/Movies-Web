@@ -23,7 +23,7 @@ export default ({ movie_info, callback, rate_val }) => {
 
   useEffect(() => {
     axios
-      .get("/userName/" + currentUser.email)
+      .get("http://localhost:8080/userName/" + currentUser.email)
       .then(function(response) {
         setAdd({ ...add, name: response.data });
         console.log(response.data);
@@ -46,7 +46,7 @@ export default ({ movie_info, callback, rate_val }) => {
     setReview(true);
     evt.preventDefault();
     axios
-      .get("/movies/comment/" + movie_info.Movie_name)
+      .get("http://localhost:8080/movies/comment/" + movie_info.Movie_name)
       .then(function(response) {
         setReviewlist(response.data);
       })
@@ -62,11 +62,11 @@ export default ({ movie_info, callback, rate_val }) => {
   const ReviewButton = evt => {
     evt.preventDefault();
     axios
-      .put("/movies/updateComment/" + movie_info.Movie_name, add)
+      .put("http://localhost:8080/movies/updateComment/" + movie_info.Movie_name, add)
       .then(function(response) {
         console.log(response);
         axios
-          .get("/movies/comment/" + movie_info.Movie_name)
+          .get("http://localhost:8080/movies/comment/" + movie_info.Movie_name)
           .then(function(response) {
             setReviewlist(response.data);
           })

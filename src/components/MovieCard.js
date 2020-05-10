@@ -34,7 +34,7 @@ export default ({ movieInfo, callback }) => {
 
   useEffect(() => {
     axios
-      .get("/movies/rating/" + movieInfo.Movie_name)
+      .get("http://localhost:8080/movies/rating/" + movieInfo.Movie_name)
       .then(function(response) {
         console.log(response.data.number);
         setRating(response.data.number);

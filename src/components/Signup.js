@@ -14,7 +14,7 @@ export default ({ toLogin }) => {
         .createUserWithEmailAndPassword(signup.email, signup.password)
         .then(function(response) {
           axios
-            .post("/userName", userName)
+            .post("http://localhost:8080/userName", userName)
             .then(function(response) {
               console(response);
             })

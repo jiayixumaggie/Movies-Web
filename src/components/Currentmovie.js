@@ -6,7 +6,7 @@ export default ({ callback }) => {
   const [List, setList] = useState([]);
   useEffect(() => {
     axios
-      .get("/movies")
+      .get("http://localhost:8080/movies")
       .then(function(response) {
         setList(response.data);
         console.log(response.data);
