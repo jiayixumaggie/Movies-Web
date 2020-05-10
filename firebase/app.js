@@ -181,6 +181,6 @@ app.put("/updateRating", async function(req, res) {
   res.send("UPDATED");
 });
 
-app.listen(port, function() {
+app.listen(process.env.PORT||port, function() {
   console.log("app started");
 });
