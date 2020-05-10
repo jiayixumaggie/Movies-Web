@@ -1,7 +1,7 @@
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceaccount.json");
 const express = require("express");
-var cors = require('cors')
+var cors = require("cors");
 const bodyParser = require("body-parser");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -12,7 +12,7 @@ const db = admin.firestore();
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 const port = 8080;
 
 const moviesCollection = db.collection("movies");
@@ -54,14 +54,13 @@ app.get("/movies/rating/:Movie_name", async function(req, res) {
     let mov = doc.data();
     mov.id = doc.id;
     for (let rating of mov.Comment) {
-
       console.log(mov.Comment);
       cur_value += rating.rating;
       count++;
     }
     let avg = Math.floor(cur_value / count);
     console.log(avg);
-    res.send({number : avg});
+    res.send({ number: avg });
   }
 });
 
@@ -183,6 +182,6 @@ app.put("/updateRating", async function(req, res) {
   res.send("UPDATED");
 });
 
-app.listen(8080, function() {
+app.listen(process.env.PORT || 8080, function() {
   console.log("app started");
 });
