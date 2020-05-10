@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import Rating from "@material-ui/lab/Rating";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 
-const useStyles = makeStyles({
-  rating: {
-    marginBottom: "10px"
-  }
-});
 export default () => {
-  const classes = useStyles();
+
   const [movieInfo, setmovieInfo] = useState({
     Movie_name: "",
     Director: "",
@@ -100,14 +92,6 @@ export default () => {
           onChange={trailer}
         ></input>
         <h2 id="label">Rating</h2>
-
-        <Rating
-          className={classes.rating}
-          name="customized-empty"
-          defaultValue={0}
-          precision={0.5}
-          emptyIcon={<StarBorderIcon fontSize="inherit" />}
-        />
         <textarea
           placeholder="Add Introduction"
           id="comment"

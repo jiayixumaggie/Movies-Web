@@ -6,7 +6,7 @@ import { AuthContext } from "./Auth";
 import app from "./base.js";
 
 function Page() {
-  const [commentpage, setcommentPage] = useState({ Page: true, Info: "" });
+  const [commentpage, setcommentPage] = useState({ Page: true, Info: "", rating: 0 });
   const Signout = ()=>{
     app.auth().signOut();
 
@@ -20,11 +20,12 @@ function Page() {
       </div>
       {commentpage.Page ? (
         <Main
-          callback={(page, info) => setcommentPage({ Page: page, Info: info })}
+          callback={(page, info, rating1) => setcommentPage({ Page: page, Info: info, rating: rating1 })}
         />
       ) : (
         <Comment
           movie_info={commentpage.Info}
+          rate_val = {commentpage.rating}
           callback={page => setcommentPage({ Page: page })}
         />
       )}

@@ -2,8 +2,6 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./serviceaccount.json");
 const express = require("express");
 const bodyParser = require("body-parser");
-//const cors = require("cors");
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://final-project-94ce2.firebaseio.com"
@@ -13,23 +11,6 @@ const db = admin.firestore();
 
 const app = express();
 app.use(bodyParser.json());
-// app.use(cors());
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Credentials", "true");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin,Cache-Control,Accept,X-Access-Token ,X-Requested-With, Content-Type, Access-Control-Request-Method"
-//   );
-//   if (req.method === "OPTIONS") {
-//     return res.status(200).end();
-//   }
-//   next();
-// });
 const port = 8080;
 
 const moviesCollection = db.collection("movies");
@@ -58,7 +39,28 @@ app.get("/userName/:uid", async function(req, res) {
     name.id = doc.id;
     res.send(name.username);
   }
- 
+});
+
+app.get("/movies/rating/:Movie_name", async function(req, res) {
+  const allMoviesDoc = await moviesCollection
+    .where("Movie_name", "==", req.params.Movie_name)
+    .get();
+
+  for (let doc of allMoviesDoc.docs) {
+    let cur_value = 0;
+    let count = 0;
+    let mov = doc.data();
+    mov.id = doc.id;
+    for (let rating of mov.Comment) {
+
+      console.log(mov.Comment);
+      cur_value += rating.rating;
+      count++;
+    }
+    let avg = Math.floor(cur_value / count);
+    console.log(avg);
+    res.send({number : avg});
+  }
 });
 
 app.get("/movies", async function(req, res) {

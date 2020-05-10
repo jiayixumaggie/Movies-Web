@@ -11,12 +11,14 @@ const useStyles = makeStyles({
     marginBottom: "1px"
   }
 });
-export default ({ movie_info, callback }) => {
+
+export default ({ movie_info, callback, rate_val }) => {
+  console.log(rate_val);
   const classes = useStyles();
   const [video, setVideo] = useState(false);
   const [review, setReview] = useState(false);
   const [reviewlist, setReviewlist] = useState([]);
-  const [add, setAdd] = useState({ name: "", review: "" });
+  const [add, setAdd] = useState({ rating: 0, name: "", review: "" });
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -105,7 +107,7 @@ export default ({ movie_info, callback }) => {
                   id="rating"
                   className={classes.rating}
                   name="customized-empty"
-                  defaultValue={2}
+                  value={rate_val}
                   precision={0.5}
                   emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 />
@@ -134,14 +136,28 @@ export default ({ movie_info, callback }) => {
                 id="comment"
                 onChange={e => setAdd({ ...add, review: e.target.value })}
               ></textarea>
-
+              <div style = {{display: "flex", flexDirection: "row"}}>
+              <h1 style = {{color: "DodgerBlue"}}>Add a Rating</h1>
+              <div style = {{marginTop: "20px", marginLeft: "10px"}}>
+              <Rating
+                className={classes.rating}
+                name="customized-empty"
+                defaultValue={0}
+                precision={0.5}
+                onChange={e =>
+                  setAdd({ ...add, rating: Number(e.target.value) })
+                }
+                emptyIcon={<StarBorderIcon fontSize="inherit" />}
+              />
+              </div>
+              </div>
               <button id="add_review_button" onClick={ReviewButton}>
                 Share Review
               </button>
             </div>
             <div id="reviewarea">
               {reviewlist.map(comment => (
-                <UserReview name={comment.name} review={comment.review} />
+                <UserReview name={comment.name} review={comment.review} rating = {comment.rating}/>
               ))}
             </div>
           </div>

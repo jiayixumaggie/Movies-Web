@@ -98,16 +98,16 @@ export default ({ callback }) => {
         </button>
       </form>
       </div>
-      <div>
+      <div id ="searchresult">
         {warning.length > 0 ? (
           <h1>{warning}</h1>
         ) : result === "no result" ? (
           <h1>Result not found</h1>
-        ) : result.length > 0 ? <div id ="searchresult">{(
+        ) : result.length > 0 ? (
           result.map(movie => (
             <MovieList movieInfo={movie} callback={callback} />
           ))
-        )}</div> : (
+        ) : (
           ""
         )}
       </div>
