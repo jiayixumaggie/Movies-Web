@@ -50,7 +50,7 @@ export default ({ movieInfo, callback }) => {
         <CardActionArea onClick={Comment}>
           <CardMedia className={classes.media} image={movieInfo.Poster_URL} />
           <CardContent className={classes.text}>
-            {movieInfo.Movie_name}
+            {movieInfo.Movie_name.replace(/_/g, " ")}
           </CardContent>
         </CardActionArea>
         <Rating

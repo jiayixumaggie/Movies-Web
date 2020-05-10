@@ -91,7 +91,7 @@ export default () => {
           value={movieInfo.Trailer_URL}
           onChange={trailer}
         ></input>
-        <h2 id="label">Rating</h2>
+       
         <textarea
           placeholder="Add Introduction"
           id="comment"
